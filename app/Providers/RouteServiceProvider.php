@@ -28,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
             ['file' => 'web', 'prefix' => '', 'middleware' => 'web'],
 
             ['path' => 'api/test', 'middleware' => 'api'],
+            ['path' => 'api/blog', 'middleware' => 'api'],
 //            ['path' => 'api/users', 'middleware' => 'api'],
         ];
     }
