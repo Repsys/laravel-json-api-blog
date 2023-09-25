@@ -19,6 +19,26 @@ class PostPolicy
         return $user && $user->is($post->author);
     }
 
+    public function viewAny(?User $user): bool
+    {
+        return true;
+    }
+
+    public function create(User $user): bool
+    {
+        return true;
+    }
+
+    public function update(User $user, Post $post): bool
+    {
+        return $user->is($post->author);
+    }
+
+    public function delete(User $user, Post $post): bool
+    {
+        return $this->update($user, $post);
+    }
+
     public function viewAuthor(?User $user, Post $post): bool
     {
         return $this->view($user, $post);
@@ -32,5 +52,20 @@ class PostPolicy
     public function viewTags(?User $user, Post $post): bool
     {
         return $this->view($user, $post);
+    }
+
+    public function updateTags(User $user, Post $post): bool
+    {
+        return $this->update($user, $post);
+    }
+
+    public function attachTags(User $user, Post $post): bool
+    {
+        return $this->update($user, $post);
+    }
+
+    public function detachTags(User $user, Post $post): bool
+    {
+        return $this->update($user, $post);
     }
 }

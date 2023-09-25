@@ -2,7 +2,9 @@
 
 namespace App\Domain\Blog\Models;
 
+use App\Domain\Blog\Factories\PostFactory;
 use App\Domain\Users\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -39,6 +41,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Post extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'content',
         'published_at',
@@ -63,5 +67,10 @@ class Post extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    protected static function newFactory(): PostFactory
+    {
+        return PostFactory::new();
     }
 }

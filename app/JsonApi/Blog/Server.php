@@ -2,10 +2,12 @@
 
 namespace App\JsonApi\Blog;
 
+use App\Domain\Blog\Models\Post;
 use App\JsonApi\Blog\Comments\CommentSchema;
 use App\JsonApi\Blog\Posts\PostSchema;
 use App\JsonApi\Blog\Tags\TagSchema;
 use App\JsonApi\Blog\Users\UserSchema;
+use Illuminate\Support\Facades\Auth;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
 
 class Server extends BaseServer
@@ -25,7 +27,11 @@ class Server extends BaseServer
      */
     public function serving(): void
     {
-        // no-op
+        Auth::shouldUse('sanctum');
+
+        Post::creating(static function (Post $post): void {
+            $post->author()->associate(Auth::user());
+        });
     }
 
     /**

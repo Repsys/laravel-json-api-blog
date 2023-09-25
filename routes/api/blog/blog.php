@@ -17,10 +17,10 @@ use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
 
 JsonApiRoute::server('blog')->resources(function (ResourceRegistrar $server) {
     $server->resource('posts', JsonApiController::class)
-        ->readOnly()
+//        ->only('index', 'show', 'store', 'update', 'delete')
         ->relationships(function (Relationships $relations) {
             $relations->hasOne('author')->readOnly();
             $relations->hasMany('comments')->readOnly();
-            $relations->hasMany('tags')->readOnly();
+            $relations->hasMany('tags');
         });;
 });
