@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: Laravel Skeleton API
+  version: 1.0.0
+  description: Laravel Skeleton API
+servers:
+  - url: /api
+tags:
+  - name: test
+    description: Тестовые API
+
+paths:
+  /test/test:
+    $ref: './test/paths.yaml#/Test'
+
+components:
+  parameters:
+    QueryInclude:
+      $ref: './common_parameters.yaml#/QueryInclude'
+    PathId:
+      $ref: './common_parameters.yaml#/PathId'
+
+  schemas:
+    PaginationTypeEnum:
+      $ref: './common_schemas.yaml#/PaginationTypeEnum'
+    EmptyDataResponse:
+      $ref: './common_schemas.yaml#/EmptyDataResponse'
+    RequestBodySort:
+      $ref: './common_schemas.yaml#/RequestBodySort'
+    RequestBodyInclude:
+      $ref: './common_schemas.yaml#/RequestBodyInclude'
+    RequestBodyPagination:
+      $ref: './common_schemas.yaml#/RequestBodyPagination'
+    ResponseBodyPagination:
+      $ref: './common_schemas.yaml#/ResponseBodyPagination'
+
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    AccessDenied:
+      description: Access denied
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
+security:
+  - basicAuth: [ ]

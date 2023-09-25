@@ -1,0 +1,17 @@
+Test:
+  get:
+    tags:
+      - test
+    operationId: test
+    summary: Тестовая API
+    description: Тестовая API
+    responses:
+      "200":
+        description: Выполнено успешно
+        content:
+          application/json:
+            schema:
+              type: object
+              nullable: true
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
